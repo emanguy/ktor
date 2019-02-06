@@ -44,7 +44,7 @@ class Logging(
         if (level.body) logRequestBody(request.body as OutgoingContent)
     }
 
-    private suspend fun logResponse(response: HttpResponse) {
+    private suspend fun logResponse(response: HttpResponse): Unit = response.use {
         if (level == LogLevel.NONE) return
 
         logger.log("RESPONSE: ${response.status}")
